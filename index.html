@@ -145,10 +145,11 @@
         </div>
         <button class="edit-btn" onclick="editCard(this)">Edit Card</button>
       `;
-      // Make the new card clickable to flip
+      // Add the event listener for the flip functionality of the new card
       newCard.querySelector('.flip-card').onclick = function() {
         this.classList.toggle('flipped');
       };
+      // Insert the new card before the "Add Card" button
       document.body.insertBefore(newCard, document.getElementById('add-card'));
     }
 
@@ -158,16 +159,20 @@
       const front = card.querySelector('.flip-card-front p');
       const back = card.querySelector('.flip-card-back p');
 
-      // Prompt the user for new text or color
-      const newFrontText = prompt("Edit the front text:", front.innerText);
-      if (newFrontText !== null) front.innerText = newFrontText;
+      // Prompt user for which side to edit
+      const sideToEdit = prompt("Which side would you like to edit?\n1: Front Side\n2: Back Side\n3: Change Color");
 
-      const newBackText = prompt("Edit the back text:", back.innerText);
-      if (newBackText !== null) back.innerText = newBackText;
-
-      const newColor = prompt("Enter a background color (hex):", "#f9c74f");
-      if (newColor !== null) {
-        card.querySelector('.flip-card-back').style.backgroundColor = newColor;
+      if (sideToEdit === "1") {
+        const newFrontText = prompt("Edit the front text:", front.innerText);
+        if (newFrontText !== null) front.innerText = newFrontText;
+      } else if (sideToEdit === "2") {
+        const newBackText = prompt("Edit the back text:", back.innerText);
+        if (newBackText !== null) back.innerText = newBackText;
+      } else if (sideToEdit === "3") {
+        const newColor = prompt("Enter a background color for the back side (hex):", "#f9c74f");
+        if (newColor !== null) {
+          card.querySelector('.flip-card-back').style.backgroundColor = newColor;
+        }
       }
     }
   </script>
