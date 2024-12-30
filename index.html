@@ -134,6 +134,8 @@
     function addCard() {
       const newCard = document.createElement('div');
       newCard.classList.add('flip-card');
+      
+      // Creating the structure of the new card
       newCard.innerHTML = `
         <div class="flip-card-inner">
           <div class="flip-card-front">
@@ -145,10 +147,12 @@
         </div>
         <button class="edit-btn" onclick="editCard(this)">Edit Card</button>
       `;
+      
       // Add the event listener for the flip functionality of the new card
       newCard.querySelector('.flip-card').onclick = function() {
         this.classList.toggle('flipped');
       };
+
       // Insert the new card before the "Add Card" button
       document.body.insertBefore(newCard, document.getElementById('add-card'));
     }
@@ -179,3 +183,4 @@
 
 </body>
 </html>
+
