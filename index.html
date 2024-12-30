@@ -71,20 +71,6 @@
     #add-card:hover {
       background-color: #45a049;
     }
-
-    .edit-btn {
-      margin-top: 10px;
-      padding: 5px 10px;
-      background-color: #ffb142;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .edit-btn:hover {
-      background-color: #ff9e30;
-    }
   </style>
 </head>
 <body>
@@ -92,38 +78,35 @@
   <!-- Existing Cards -->
   <div class="flip-card" onclick="this.classList.toggle('flipped')">
     <div class="flip-card-inner">
-      <div class="flip-card-front">
+      <div class="flip-card-front" ondblclick="editCard(this)">
         <p>#1</p>
       </div>
-      <div class="flip-card-back">
+      <div class="flip-card-back" ondblclick="editCard(this)">
         <p>Believe in people.</p>
       </div>
     </div>
-    <button class="edit-btn" onclick="editCard(this)">Edit Card</button>
   </div>
 
   <div class="flip-card" onclick="this.classList.toggle('flipped')">
     <div class="flip-card-inner">
-      <div class="flip-card-front">
+      <div class="flip-card-front" ondblclick="editCard(this)">
         <p>#2</p>
       </div>
-      <div class="flip-card-back">
+      <div class="flip-card-back" ondblclick="editCard(this)">
         <p>Embrace challenges.</p>
       </div>
     </div>
-    <button class="edit-btn" onclick="editCard(this)">Edit Card</button>
   </div>
 
   <div class="flip-card" onclick="this.classList.toggle('flipped')">
     <div class="flip-card-inner">
-      <div class="flip-card-front">
+      <div class="flip-card-front" ondblclick="editCard(this)">
         <p>#3</p>
       </div>
-      <div class="flip-card-back">
+      <div class="flip-card-back" ondblclick="editCard(this)">
         <p>Stay focused and positive.</p>
       </div>
     </div>
-    <button class="edit-btn" onclick="editCard(this)">Edit Card</button>
   </div>
 
   <!-- Button to Add More Cards -->
@@ -136,44 +119,22 @@
       newCard.classList.add('flip-card');
       newCard.innerHTML = `
         <div class="flip-card-inner">
-          <div class="flip-card-front">
+          <div class="flip-card-front" ondblclick="editCard(this)">
             <p>New Card</p>
           </div>
-          <div class="flip-card-back">
+          <div class="flip-card-back" ondblclick="editCard(this)">
             <p>Edit me!</p>
           </div>
         </div>
-        <button class="edit-btn" onclick="editCard(this)">Edit Card</button>
       `;
-      // Make the new card clickable to flip
-      newCard.onclick = function() {
-        this.classList.toggle('flipped');
-      };
       document.body.insertBefore(newCard, document.getElementById('add-card'));
     }
 
-    // Function to edit the card's content or color
-    function editCard(button) {
-      const card = button.parentElement;
-      const front = card.querySelector('.flip-card-front p');
-      const back = card.querySelector('.flip-card-back p');
-
-      // Provide options for editing
-      const option = prompt("What would you like to edit?\n1. Front Text\n2. Back Text\n3. Back Color", "1");
-
-      if (option === "1") {
-        const newFrontText = prompt("Edit the front text:", front.innerText);
-        if (newFrontText !== null) front.innerText = newFrontText;
-      } else if (option === "2") {
-        const newBackText = prompt("Edit the back text:", back.innerText);
-        if (newBackText !== null) back.innerText = newBackText;
-      } else if (option === "3") {
-        const newColor = prompt("Enter a background color (hex):", "#f9c74f");
-        if (newColor !== null) {
-          card.querySelector('.flip-card-back').style.backgroundColor = newColor;
-        }
-      } else {
-        alert("Invalid option. Please try again.");
+    // Function to edit the content of the card when double-clicked
+    function editCard(element) {
+      const newText = prompt("Edit the text:", element.innerText);
+      if (newText !== null) {
+        element.innerText = newText;
       }
     }
   </script>
